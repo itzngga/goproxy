@@ -344,16 +344,36 @@ func httpError(w io.WriteCloser, ctx *ProxyCtx, err error) {
 	}
 }
 
+var copyBufPool = sync.Pool{
+	New: func() any {
+		return make([]byte, 4096)
+	},
+}
+
+func CopyZeroAlloc(w io.Writer, r io.Reader) (int64, error) {
+	if wt, ok := r.(io.WriterTo); ok {
+		return wt.WriteTo(w)
+	}
+	if rt, ok := w.(io.ReaderFrom); ok {
+		return rt.ReadFrom(r)
+	}
+	vbuf := copyBufPool.Get()
+	buf := vbuf.([]byte)
+	n, err := io.CopyBuffer(w, r, buf)
+	copyBufPool.Put(vbuf)
+	return n, err
+}
+
 func copyOrWarn(ctx *ProxyCtx, dst io.Writer, src io.Reader, wg *sync.WaitGroup) {
-	if _, err := io.Copy(dst, src); err != nil {
-		ctx.Warnf("Error copying to client: %s", err)
+	if _, err := CopyZeroAlloc(dst, src); err != nil {
+		//ctx.Warnf("Error copying to client: %s", err)
 	}
 	wg.Done()
 }
 
 func copyAndClose(ctx *ProxyCtx, dst, src halfClosable) {
-	if _, err := io.Copy(dst, src); err != nil {
-		ctx.Warnf("Error copying to client: %s", err)
+	if _, err := CopyZeroAlloc(dst, src); err != nil {
+		//ctx.Warnf("Error copying to client: %s", err)
 	}
 
 	dst.CloseWrite()
