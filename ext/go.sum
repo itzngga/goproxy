@@ -1,2 +1,5 @@
+github.com/itzngga/goproxy v0.0.0-20240522094125-9870c3d500a3 h1:OBjVQdCXUZcgXsHrTb71scQ4lVrwDkSvaqLTbmeNtS4=
+github.com/itzngga/goproxy v0.0.0-20240522094125-9870c3d500a3/go.mod h1:lfdUU328kUomxxlsnL5bw9XKjF419ASP0jqnbOPafPU=
+github.com/itzngga/goproxy/ext v0.0.0-20240522093522-41fb955f60a2/go.mod h1:tnw8PbpyQVQmM7yo4KaFAlvVOjj4G1hbTgQ1EE3w35M=
 github.com/rogpeppe/go-charset v0.0.0-20180617210344-2471d30d28b4 h1:BN/Nyn2nWMoqGRA7G7paDNDqTXE30mXGqzzybrfo05w=
 github.com/rogpeppe/go-charset v0.0.0-20180617210344-2471d30d28b4/go.mod h1:qgYeAmZ5ZIpBWTGllZSQnw97Dj+woV0toclVaRGI8pc=

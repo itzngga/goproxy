@@ -1,3 +1,7 @@
-module github.com/elazarl/goproxy
+module github.com/itzngga/goproxy
 
-require github.com/elazarl/goproxy/ext v0.0.0-20190711103511-473e67f1d7d2
+go 1.22.0
+
+require github.com/itzngga/goproxy/ext v0.0.0-20240522094125-9870c3d500a3
+
+require github.com/rogpeppe/go-charset v0.0.0-20180617210344-2471d30d28b4 // indirect
